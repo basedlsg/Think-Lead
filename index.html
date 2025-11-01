@@ -1,0 +1,708 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LEAD — Where Vision Meets Action</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --black: #000000;
+            --white: #ffffff;
+            --gray: #86868b;
+            --light-gray: #f5f5f7;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: var(--white);
+            color: var(--black);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        /* Typography */
+        .hero-title {
+            font-size: clamp(3rem, 8vw, 6rem);
+            font-weight: 700;
+            letter-spacing: -0.03em;
+            line-height: 1.05;
+            margin-bottom: 1.5rem;
+        }
+
+        .section-title {
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            line-height: 1.1;
+            margin-bottom: 2rem;
+        }
+
+        .subsection-title {
+            font-size: clamp(1.5rem, 3vw, 2rem);
+            font-weight: 600;
+            letter-spacing: -0.01em;
+            margin-bottom: 1rem;
+        }
+
+        .body-text {
+            font-size: clamp(1.125rem, 2vw, 1.375rem);
+            line-height: 1.6;
+            color: var(--black);
+            max-width: 800px;
+        }
+
+        .body-text-small {
+            font-size: clamp(1rem, 1.5vw, 1.125rem);
+            line-height: 1.65;
+            color: var(--black);
+        }
+
+        .label {
+            font-size: 0.875rem;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            font-weight: 600;
+            color: var(--gray);
+            margin-bottom: 0.5rem;
+        }
+
+        /* Layout */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 5%;
+        }
+
+        section {
+            padding: clamp(5rem, 15vh, 10rem) 0;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+        }
+
+        section:last-of-type {
+            border-bottom: none;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 8rem 0;
+        }
+
+        .hero-content {
+            max-width: 980px;
+        }
+
+        .hero .body-text {
+            margin: 0 auto 3rem;
+            opacity: 0.95;
+        }
+
+        /* Buttons */
+        .cta-group {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 3rem;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 1rem 2.5rem;
+            font-size: 1.125rem;
+            font-weight: 500;
+            text-decoration: none;
+            border-radius: 980px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: pointer;
+            border: 2px solid var(--black);
+        }
+
+        .btn-primary {
+            background: var(--black);
+            color: var(--white);
+        }
+
+        .btn-primary:hover {
+            background: var(--white);
+            color: var(--black);
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background: var(--white);
+            color: var(--black);
+        }
+
+        .btn-secondary:hover {
+            background: var(--black);
+            color: var(--white);
+            transform: translateY(-2px);
+        }
+
+        /* Process Flow */
+        .process-flow {
+            display: flex;
+            justify-content: space-between;
+            gap: 2rem;
+            margin: 4rem 0;
+            flex-wrap: wrap;
+        }
+
+        .process-step {
+            flex: 1;
+            min-width: 200px;
+            text-align: center;
+        }
+
+        .process-step-number {
+            font-size: 3rem;
+            font-weight: 700;
+            opacity: 0.15;
+            margin-bottom: 0.5rem;
+        }
+
+        .process-arrow {
+            font-size: 1.5rem;
+            opacity: 0.3;
+            align-self: center;
+        }
+
+        /* Feature Grid */
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 4rem;
+            margin: 4rem 0;
+        }
+
+        .feature {
+            text-align: left;
+        }
+
+        .feature h3 {
+            margin-bottom: 1rem;
+        }
+
+        /* Hemispheres */
+        .hemispheres {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 4rem;
+            margin: 4rem 0;
+        }
+
+        .hemisphere {
+            padding: 3rem;
+            border: 1px solid var(--black);
+        }
+
+        .hemisphere-label {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .hemisphere h3 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .hemisphere-subtitle {
+            font-size: 1rem;
+            color: var(--gray);
+            margin-bottom: 2rem;
+        }
+
+        .hemisphere-list {
+            list-style: none;
+            margin-bottom: 2rem;
+        }
+
+        .hemisphere-list li {
+            padding: 0.5rem 0;
+            font-size: 1rem;
+        }
+
+        .hemisphere-list li::before {
+            content: "·";
+            margin-right: 0.75rem;
+            font-weight: bold;
+        }
+
+        /* Stats Grid */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 3rem;
+            margin: 4rem 0;
+        }
+
+        .stat {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            font-size: 1rem;
+            color: var(--gray);
+        }
+
+        /* Partners Grid */
+        .partners-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            margin: 4rem 0;
+        }
+
+        .partner-category h4 {
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            margin-bottom: 1rem;
+            color: var(--gray);
+        }
+
+        .partner-category p {
+            font-size: 1rem;
+            line-height: 1.8;
+        }
+
+        /* Pillars */
+        .pillars {
+            margin: 4rem 0;
+        }
+
+        .pillar {
+            margin-bottom: 3rem;
+            padding-bottom: 3rem;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+        }
+
+        .pillar:last-child {
+            border-bottom: none;
+        }
+
+        /* Pathways */
+        .pathways {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 3rem;
+            margin: 4rem 0;
+        }
+
+        .pathway {
+            padding: 2.5rem;
+            background: var(--light-gray);
+            transition: transform 0.3s ease;
+        }
+
+        .pathway:hover {
+            transform: translateY(-4px);
+        }
+
+        .pathway h4 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--black);
+            color: var(--white);
+            padding: clamp(5rem, 10vh, 8rem) 0;
+            text-align: center;
+        }
+
+        footer .section-title {
+            color: var(--white);
+        }
+
+        footer .body-text {
+            color: var(--white);
+            margin: 2rem auto 3rem;
+            opacity: 0.9;
+        }
+
+        footer .btn-primary {
+            background: var(--white);
+            color: var(--black);
+            border-color: var(--white);
+        }
+
+        footer .btn-primary:hover {
+            background: transparent;
+            color: var(--white);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .process-flow {
+                flex-direction: column;
+            }
+
+            .process-arrow {
+                transform: rotate(90deg);
+                margin: 1rem 0;
+            }
+
+            .hemispheres {
+                grid-template-columns: 1fr;
+            }
+
+            .cta-group {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .btn {
+                width: 100%;
+                max-width: 300px;
+            }
+        }
+
+        /* Smooth fade-in animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animate-in {
+            animation: fadeInUp 0.8s ease-out forwards;
+        }
+    </style>
+</head>
+<body>
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1 class="hero-title">Where Vision Meets Action</h1>
+                <p class="body-text">
+                    Saudi Arabia is not waiting for the future — it's building it. LEAD is the world's largest AI education and creation initiative, designed to train and empower over 15 million Saudis with hands-on experience in today's most advanced AI tools. From engineering and design to storytelling and strategy, LEAD turns learning into action and ambition into achievement.
+                </p>
+                <p class="body-text">
+                    Aligned with Vision 2030, LEAD brings together government, the private sector, and the world's leading AI companies to make innovation part of daily life. It's not about studying technology — it's about using it to build smarter businesses, better cities, and a more creative nation ready to lead globally.
+                </p>
+                <div class="cta-group">
+                    <a href="#join" class="btn btn-primary">Start Learning</a>
+                    <a href="#partners" class="btn btn-secondary">Join as a Partner</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- The Movement -->
+    <section id="movement">
+        <div class="container">
+            <h2 class="section-title">Building a Generation That Builds</h2>
+            <p class="body-text" style="margin-bottom: 3rem;">
+                LEAD is a nationwide movement that translates potential into progress. It links learning, creativity, and entrepreneurship into a single build cycle — designed to equip Saudi talent with the skills and opportunities to shape the AI era from the ground up.
+            </p>
+
+            <div class="process-flow">
+                <div class="process-step">
+                    <h3 class="subsection-title">Learn</h3>
+                    <p class="body-text-small">Acquire skills through hands-on training</p>
+                </div>
+                <div class="process-arrow">→</div>
+                <div class="process-step">
+                    <h3 class="subsection-title">Build</h3>
+                    <p class="body-text-small">Create real products and solutions</p>
+                </div>
+                <div class="process-arrow">→</div>
+                <div class="process-step">
+                    <h3 class="subsection-title">Launch</h3>
+                    <p class="body-text-small">Deploy to market or production</p>
+                </div>
+                <div class="process-arrow">→</div>
+                <div class="process-step">
+                    <h3 class="subsection-title">Scale</h3>
+                    <p class="body-text-small">Grow ventures and careers</p>
+                </div>
+            </div>
+
+            <div class="feature-grid">
+                <div class="feature">
+                    <h3 class="subsection-title">National Collaboration</h3>
+                    <p class="body-text-small">
+                        Ministries, universities, and companies operate as one connected ecosystem: aligned briefs, shared infrastructure, and real deployment paths.
+                    </p>
+                </div>
+                <div class="feature">
+                    <h3 class="subsection-title">Real Outcomes</h3>
+                    <p class="body-text-small">
+                        Every serious project is connected to clear next steps — government pilots, startup formation, or employment with leading organizations.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Saudi Arabia -->
+    <section id="why-saudi">
+        <div class="container">
+            <h2 class="section-title">The Perfect Ground for a Global Transformation</h2>
+            <p class="body-text">
+                Saudi Arabia's commitment to technology is comprehensive — digital infrastructure, policy, and investment are aligned to build an AI-driven economy. With ~99% internet penetration and a population where ~69–71% are under 35, the Kingdom combines near-universal connectivity with a dynamic, future-oriented population.
+            </p>
+            <p class="body-text" style="margin-top: 2rem;">
+                The government's alignment around Vision 2030 ensures innovation is supported and scaled at every level, while global partnerships and long-term investments in education position the Kingdom to become a primary center for AI development and application.
+            </p>
+
+            <div class="stats-grid">
+                <div class="stat">
+                    <div class="stat-number">~99%</div>
+                    <div class="stat-label">Internet Penetration</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-number">~70%</div>
+                    <div class="stat-label">Under 35 Years Old</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-number">15M+</div>
+                    <div class="stat-label">Targeted for Training</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- The LEAD Program -->
+    <section id="program">
+        <div class="container">
+            <h2 class="section-title">A National Platform for Learning, Building, and Launching</h2>
+            <p class="body-text" style="margin-bottom: 3rem;">
+                LEAD convenes the world's top AI companies — OpenAI, Google, Anthropic, Amazon, Midjourney, Runway, Adobe, and more — to teach and train across the full spectrum of AI: from technical depth (coding, automation, data systems) to practical creativity (design, media, business workflows).
+            </p>
+
+            <div class="pillars">
+                <div class="pillar">
+                    <h3 class="subsection-title">Learn</h3>
+                    <p class="body-text-small">
+                        Focused, hands-on sessions using real tools to solve Saudi-relevant problems in engineering, design, storytelling, and business operations.
+                    </p>
+                </div>
+                <div class="pillar">
+                    <h3 class="subsection-title">Build</h3>
+                    <p class="body-text-small">
+                        The national LEAD Hackathon: a high-intensity sprint where teams apply their new skills to concrete briefs and deliver working systems and creative outputs.
+                    </p>
+                </div>
+                <div class="pillar">
+                    <h3 class="subsection-title">Launch</h3>
+                    <p class="body-text-small">
+                        Top projects move into government and corporate pilots, a 90-day venture studio, and hiring pathways with leading employers.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- The Hackathon -->
+    <section id="hackathon">
+        <div class="container">
+            <h2 class="section-title">The Nationwide Creation Sprint</h2>
+            <p class="body-text" style="margin-bottom: 3rem;">
+                The LEAD Hackathon is where learning becomes invention — a Kingdom-wide sprint uniting developers, artists, entrepreneurs, and professionals to build Saudi Arabia's next generation of solutions.
+            </p>
+
+            <div class="hemispheres">
+                <div class="hemisphere">
+                    <div class="hemisphere-label">LEFT BRAIN</div>
+                    <h3>BUILD</h3>
+                    <p class="hemisphere-subtitle">Logic, engineering, and systems</p>
+
+                    <p style="font-weight: 600; margin-bottom: 0.5rem;">What gets built:</p>
+                    <ul class="hemisphere-list">
+                        <li>AI agents</li>
+                        <li>Business automation</li>
+                        <li>Domain apps (energy, healthcare, education, logistics)</li>
+                        <li>Data products and integrations</li>
+                    </ul>
+
+                    <p style="font-weight: 600; margin-bottom: 0.5rem;">What judges look for:</p>
+                    <p class="body-text-small">
+                        Reliability, utility, integration readiness, measurable benefit to users or operations.
+                    </p>
+                </div>
+
+                <div class="hemisphere">
+                    <div class="hemisphere-label">RIGHT BRAIN</div>
+                    <h3>CREATE</h3>
+                    <p class="hemisphere-subtitle">Imagination, art, and storytelling</p>
+
+                    <p style="font-weight: 600; margin-bottom: 0.5rem;">What gets created:</p>
+                    <ul class="hemisphere-list">
+                        <li>Generative video and imagery</li>
+                        <li>Audio experiences</li>
+                        <li>Brand systems</li>
+                        <li>Cultural and heritage storytelling</li>
+                        <li>Next-gen media formats</li>
+                    </ul>
+
+                    <p style="font-weight: 600; margin-bottom: 0.5rem;">What judges look for:</p>
+                    <p class="body-text-small">
+                        Originality, craft, audience impact, cultural relevance, responsible use.
+                    </p>
+                </div>
+            </div>
+
+            <p class="body-text" style="text-align: center; margin-top: 3rem;">
+                Accessible across all regions (hubs + online). Backed by ministries, universities, and global AI leaders. Real prizes, real pilots, and real pathways to scale.
+            </p>
+        </div>
+    </section>
+
+    <!-- Pathways to Impact -->
+    <section id="pathways">
+        <div class="container">
+            <h2 class="section-title">From Skills to Scale</h2>
+            <p class="body-text" style="margin-bottom: 3rem;">
+                Participants follow a clear trajectory — from learning to building to real-world opportunity. The best projects don't end on stage; they move directly into structured programs with defined timelines.
+            </p>
+
+            <div class="pathways">
+                <div class="pathway">
+                    <h4>Government & Corporate Pilots</h4>
+                    <p class="body-text-small">
+                        Deployment inside real services and systems, with success metrics and implementation support.
+                    </p>
+                </div>
+
+                <div class="pathway">
+                    <h4>The Venture Studio (90 days)</h4>
+                    <p class="body-text-small">
+                        Product shaping, customer access, and company formation for teams ready to scale.
+                    </p>
+                </div>
+
+                <div class="pathway">
+                    <h4>Hiring Pathways</h4>
+                    <p class="body-text-small">
+                        Roles and apprenticeships with leading employers and ministries for standout talent.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Partners & Supporters -->
+    <section id="partners">
+        <div class="container">
+            <h2 class="section-title">Powered by Partnership</h2>
+            <p class="body-text" style="margin-bottom: 3rem;">
+                LEAD is a shared national platform where each partner contributes tools, expertise, and opportunity.
+            </p>
+
+            <div class="partners-grid">
+                <div class="partner-category">
+                    <h4>Government Partners</h4>
+                    <p>
+                        Ministries of Education, Communications, Energy, HR, Culture, and more.
+                    </p>
+                </div>
+
+                <div class="partner-category">
+                    <h4>Corporate Partners</h4>
+                    <p>
+                        Aramco, STC, NEOM, SABIC, PIF-backed enterprises.
+                    </p>
+                </div>
+
+                <div class="partner-category">
+                    <h4>Global AI Partners</h4>
+                    <p>
+                        OpenAI, Google, Anthropic, Amazon, Midjourney, Runway, Adobe, and others.
+                    </p>
+                </div>
+
+                <div class="partner-category">
+                    <h4>Education Network</h4>
+                    <p>
+                        Universities and training centers across the Kingdom delivering LEAD programs on campus and online.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Impact Dashboard -->
+    <section id="impact">
+        <div class="container">
+            <h2 class="section-title">Measuring a Nation in Motion</h2>
+            <p class="body-text" style="margin-bottom: 3rem;">
+                LEAD tracks progress in real time — not only participation, but results that matter to citizens and the economy. With 15+ million Saudis targeted for training and a wider regional audience reachable through partner channels, the initiative operates at historic scale.
+            </p>
+
+            <div class="stats-grid">
+                <div class="stat">
+                    <div class="stat-number">—</div>
+                    <div class="stat-label">Saudis Trained</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-number">—</div>
+                    <div class="stat-label">Projects Built</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-number">—</div>
+                    <div class="stat-label">Pilots Launched</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-number">—</div>
+                    <div class="stat-label">Startups Formed</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-number">—</div>
+                    <div class="stat-label">Jobs Created</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-number">—</div>
+                    <div class="stat-label">Regional Participation</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Join the Movement (Footer) -->
+    <footer id="join">
+        <div class="container">
+            <h2 class="section-title">Lead the Future</h2>
+            <p class="body-text">
+                Every role matters — learner, creator, company, or ministry. Together, we are defining how Saudi Arabia leads the AI era. Join LEAD and help build what comes next.
+            </p>
+            <div class="cta-group">
+                <a href="#" class="btn btn-primary">Join the Movement</a>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
