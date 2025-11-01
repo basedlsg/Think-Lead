@@ -14,7 +14,7 @@
         :root {
             --black: #000000;
             --white: #ffffff;
-            --gray: #86868b;
+            --gray: #6e6e73;
             --light-gray: #f5f5f7;
         }
 
@@ -29,68 +29,81 @@
             line-height: 1.6;
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
+            overflow-x: hidden;
         }
 
         /* Typography */
         .hero-title {
-            font-size: clamp(3rem, 8vw, 6rem);
+            font-size: clamp(3.5rem, 12vw, 9rem);
             font-weight: 700;
-            letter-spacing: -0.03em;
-            line-height: 1.05;
-            margin-bottom: 1.5rem;
+            letter-spacing: -0.04em;
+            line-height: 0.95;
+            margin-bottom: 3rem;
+        }
+
+        .hero-subtitle {
+            font-size: clamp(1.25rem, 2.5vw, 1.75rem);
+            font-weight: 400;
+            line-height: 1.5;
+            max-width: 800px;
+            margin: 0 auto 2rem;
+            opacity: 0.85;
         }
 
         .section-title {
-            font-size: clamp(2rem, 5vw, 3.5rem);
+            font-size: clamp(2.5rem, 6vw, 5rem);
             font-weight: 700;
-            letter-spacing: -0.02em;
-            line-height: 1.1;
-            margin-bottom: 2rem;
+            letter-spacing: -0.03em;
+            line-height: 1.05;
+            margin-bottom: 3rem;
         }
 
-        .subsection-title {
-            font-size: clamp(1.5rem, 3vw, 2rem);
+        .section-title-large {
+            font-size: clamp(3rem, 8vw, 7rem);
+            font-weight: 700;
+            letter-spacing: -0.04em;
+            line-height: 0.95;
+            margin-bottom: 4rem;
+        }
+
+        .eyebrow {
+            font-size: clamp(0.75rem, 1.5vw, 0.875rem);
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
             font-weight: 600;
-            letter-spacing: -0.01em;
-            margin-bottom: 1rem;
+            color: var(--gray);
+            margin-bottom: 1.5rem;
+            display: block;
         }
 
         .body-text {
-            font-size: clamp(1.125rem, 2vw, 1.375rem);
+            font-size: clamp(1.125rem, 2vw, 1.5rem);
             line-height: 1.6;
             color: var(--black);
-            max-width: 800px;
         }
 
         .body-text-small {
-            font-size: clamp(1rem, 1.5vw, 1.125rem);
+            font-size: clamp(1rem, 1.5vw, 1.25rem);
             line-height: 1.65;
             color: var(--black);
         }
 
-        .label {
-            font-size: 0.875rem;
-            text-transform: uppercase;
-            letter-spacing: 0.08em;
-            font-weight: 600;
-            color: var(--gray);
-            margin-bottom: 0.5rem;
-        }
-
         /* Layout */
         .container {
-            max-width: 1200px;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 5%;
+        }
+
+        .container-narrow {
+            max-width: 900px;
             margin: 0 auto;
             padding: 0 5%;
         }
 
         section {
-            padding: clamp(5rem, 15vh, 10rem) 0;
-            border-bottom: 1px solid rgba(0, 0, 0, 0.08);
-        }
-
-        section:last-of-type {
-            border-bottom: none;
+            position: relative;
+            padding: clamp(6rem, 20vh, 12rem) 0;
         }
 
         /* Hero Section */
@@ -100,16 +113,25 @@
             align-items: center;
             justify-content: center;
             text-align: center;
-            padding: 8rem 0;
+            padding: 12rem 0 8rem;
+            position: relative;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 1px;
+            height: 100%;
+            background: linear-gradient(to bottom, transparent, rgba(0,0,0,0.1), transparent);
         }
 
         .hero-content {
-            max-width: 980px;
-        }
-
-        .hero .body-text {
-            margin: 0 auto 3rem;
-            opacity: 0.95;
+            max-width: 1100px;
+            position: relative;
+            z-index: 1;
         }
 
         /* Buttons */
@@ -118,19 +140,31 @@
             gap: 1.5rem;
             justify-content: center;
             flex-wrap: wrap;
-            margin-top: 3rem;
+            margin-top: 4rem;
         }
 
         .btn {
             display: inline-block;
-            padding: 1rem 2.5rem;
+            padding: 1.25rem 3rem;
             font-size: 1.125rem;
             font-weight: 500;
             text-decoration: none;
-            border-radius: 980px;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            border-radius: 100px;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
             cursor: pointer;
             border: 2px solid var(--black);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            transition: left 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         .btn-primary {
@@ -138,213 +172,411 @@
             color: var(--white);
         }
 
-        .btn-primary:hover {
+        .btn-primary::before {
             background: var(--white);
+        }
+
+        .btn-primary:hover {
             color: var(--black);
-            transform: translateY(-2px);
+        }
+
+        .btn-primary:hover::before {
+            left: 0;
         }
 
         .btn-secondary {
-            background: var(--white);
+            background: transparent;
             color: var(--black);
         }
 
         .btn-secondary:hover {
             background: var(--black);
             color: var(--white);
-            transform: translateY(-2px);
+            transform: translateY(-3px);
         }
 
-        /* Process Flow */
+        /* Split Layout */
+        .split-section {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8rem;
+            align-items: center;
+            margin: 6rem 0;
+        }
+
+        .split-section.reverse {
+            direction: rtl;
+        }
+
+        .split-section.reverse > * {
+            direction: ltr;
+        }
+
+        /* Process Flow - Redesigned */
+        .process-wrapper {
+            margin: 8rem 0;
+            position: relative;
+        }
+
         .process-flow {
-            display: flex;
-            justify-content: space-between;
-            gap: 2rem;
-            margin: 4rem 0;
-            flex-wrap: wrap;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 0;
+            position: relative;
+        }
+
+        .process-flow::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: var(--black);
+            transform: translateY(-50%);
         }
 
         .process-step {
-            flex: 1;
-            min-width: 200px;
+            padding: 3rem 2rem;
             text-align: center;
+            position: relative;
+            border-right: 1px solid rgba(0,0,0,0.15);
         }
 
-        .process-step-number {
-            font-size: 3rem;
-            font-weight: 700;
-            opacity: 0.15;
-            margin-bottom: 0.5rem;
+        .process-step:last-child {
+            border-right: none;
         }
 
-        .process-arrow {
-            font-size: 1.5rem;
-            opacity: 0.3;
-            align-self: center;
+        .process-step::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 16px;
+            height: 16px;
+            background: var(--black);
+            border-radius: 50%;
+            z-index: 1;
         }
 
-        /* Feature Grid */
-        .feature-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 4rem;
-            margin: 4rem 0;
-        }
-
-        .feature {
-            text-align: left;
-        }
-
-        .feature h3 {
+        .process-number {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--gray);
             margin-bottom: 1rem;
         }
 
-        /* Hemispheres */
+        .process-title {
+            font-size: clamp(1.5rem, 2.5vw, 2rem);
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        /* Feature Cards */
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 0;
+            margin: 6rem 0;
+            border: 1px solid var(--black);
+        }
+
+        .feature {
+            padding: 4rem;
+            border-right: 1px solid var(--black);
+            border-bottom: 1px solid var(--black);
+        }
+
+        .feature:nth-child(2n) {
+            border-right: none;
+        }
+
+        .feature:nth-last-child(-n+2) {
+            border-bottom: none;
+        }
+
+        .feature h3 {
+            font-size: clamp(1.75rem, 3vw, 2.5rem);
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            letter-spacing: -0.02em;
+        }
+
+        /* Stats - Redesigned */
+        .stats-wrapper {
+            background: var(--black);
+            color: var(--white);
+            padding: 8rem 0;
+            margin: 8rem 0;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 6rem;
+        }
+
+        .stat {
+            text-align: center;
+            padding: 3rem 0;
+            border-left: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .stat:first-child {
+            border-left: none;
+        }
+
+        .stat-number {
+            font-size: clamp(3.5rem, 8vw, 6rem);
+            font-weight: 700;
+            margin-bottom: 1rem;
+            letter-spacing: -0.02em;
+        }
+
+        .stat-label {
+            font-size: clamp(0.875rem, 1.5vw, 1.125rem);
+            color: rgba(255,255,255,0.7);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        /* Hemispheres - Redesigned */
+        .hemispheres-wrapper {
+            margin: 8rem 0;
+        }
+
         .hemispheres {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 4rem;
-            margin: 4rem 0;
+            grid-template-columns: 1fr 1fr;
+            gap: 0;
+            border: 1px solid var(--black);
         }
 
         .hemisphere {
-            padding: 3rem;
-            border: 1px solid var(--black);
+            padding: 5rem 4rem;
+            position: relative;
+        }
+
+        .hemisphere:first-child {
+            border-right: 1px solid var(--black);
         }
 
         .hemisphere-label {
             font-size: 0.75rem;
             text-transform: uppercase;
-            letter-spacing: 0.12em;
+            letter-spacing: 0.15em;
             font-weight: 600;
-            margin-bottom: 0.5rem;
+            color: var(--gray);
+            margin-bottom: 2rem;
         }
 
         .hemisphere h3 {
-            font-size: 2rem;
+            font-size: clamp(3rem, 5vw, 4.5rem);
+            font-weight: 700;
             margin-bottom: 1rem;
+            letter-spacing: -0.03em;
         }
 
         .hemisphere-subtitle {
-            font-size: 1rem;
+            font-size: 1.125rem;
             color: var(--gray);
-            margin-bottom: 2rem;
+            margin-bottom: 3rem;
         }
 
         .hemisphere-list {
             list-style: none;
-            margin-bottom: 2rem;
+            margin: 2rem 0 3rem;
         }
 
         .hemisphere-list li {
-            padding: 0.5rem 0;
-            font-size: 1rem;
+            padding: 0.75rem 0;
+            font-size: 1.125rem;
+            border-bottom: 1px solid rgba(0,0,0,0.08);
         }
 
-        .hemisphere-list li::before {
-            content: "·";
-            margin-right: 0.75rem;
-            font-weight: bold;
+        .hemisphere-list li:last-child {
+            border-bottom: none;
         }
 
-        /* Stats Grid */
-        .stats-grid {
+        /* Pillars - Redesigned */
+        .pillars {
+            margin: 8rem 0;
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 3rem;
-            margin: 4rem 0;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 0;
+            border: 1px solid var(--black);
         }
 
-        .stat {
-            text-align: center;
+        .pillar {
+            padding: 4rem 3rem;
+            border-right: 1px solid var(--black);
+            position: relative;
+            transition: background 0.3s ease;
         }
 
-        .stat-number {
-            font-size: 3rem;
-            font-weight: 700;
-            margin-bottom: 0.5rem;
+        .pillar:last-child {
+            border-right: none;
         }
 
-        .stat-label {
+        .pillar:hover {
+            background: var(--light-gray);
+        }
+
+        .pillar-number {
             font-size: 1rem;
+            font-weight: 600;
             color: var(--gray);
+            margin-bottom: 1rem;
         }
 
-        /* Partners Grid */
+        .pillar h3 {
+            font-size: clamp(1.75rem, 3vw, 2.5rem);
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            letter-spacing: -0.02em;
+        }
+
+        /* Pathways - Redesigned */
+        .pathways {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 0;
+            margin: 6rem 0;
+            border: 1px solid var(--black);
+        }
+
+        .pathway {
+            padding: 4rem 3rem;
+            border-right: 1px solid var(--black);
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .pathway:last-child {
+            border-right: none;
+        }
+
+        .pathway::after {
+            content: '→';
+            position: absolute;
+            bottom: 2rem;
+            right: 2rem;
+            font-size: 2rem;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .pathway:hover {
+            background: var(--black);
+            color: var(--white);
+        }
+
+        .pathway:hover::after {
+            opacity: 1;
+        }
+
+        .pathway h4 {
+            font-size: clamp(1.5rem, 2.5vw, 2rem);
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            letter-spacing: -0.02em;
+        }
+
+        /* Partners - Redesigned */
         .partners-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 3rem;
-            margin: 4rem 0;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 0;
+            margin: 6rem 0;
+            border: 1px solid var(--black);
+        }
+
+        .partner-category {
+            padding: 4rem;
+            border-right: 1px solid var(--black);
+            border-bottom: 1px solid var(--black);
+        }
+
+        .partner-category:nth-child(2n) {
+            border-right: none;
+        }
+
+        .partner-category:nth-last-child(-n+2) {
+            border-bottom: none;
         }
 
         .partner-category h4 {
             font-size: 1rem;
             text-transform: uppercase;
-            letter-spacing: 0.08em;
-            margin-bottom: 1rem;
+            letter-spacing: 0.1em;
+            margin-bottom: 2rem;
             color: var(--gray);
+            font-weight: 600;
         }
 
         .partner-category p {
-            font-size: 1rem;
-            line-height: 1.8;
+            font-size: clamp(1.25rem, 2vw, 1.5rem);
+            line-height: 1.6;
+            font-weight: 500;
         }
 
-        /* Pillars */
-        .pillars {
-            margin: 4rem 0;
+        /* Impact Dashboard - Redesigned */
+        .impact-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 0;
+            margin: 6rem 0;
+            border: 1px solid var(--black);
         }
 
-        .pillar {
-            margin-bottom: 3rem;
-            padding-bottom: 3rem;
-            border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+        .impact-stat {
+            padding: 4rem 3rem;
+            text-align: center;
+            border-right: 1px solid var(--black);
+            border-bottom: 1px solid var(--black);
         }
 
-        .pillar:last-child {
+        .impact-stat:nth-child(3n) {
+            border-right: none;
+        }
+
+        .impact-stat:nth-last-child(-n+3) {
             border-bottom: none;
         }
 
-        /* Pathways */
-        .pathways {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 3rem;
-            margin: 4rem 0;
-        }
-
-        .pathway {
-            padding: 2.5rem;
-            background: var(--light-gray);
-            transition: transform 0.3s ease;
-        }
-
-        .pathway:hover {
-            transform: translateY(-4px);
-        }
-
-        .pathway h4 {
-            font-size: 1.5rem;
+        .impact-number {
+            font-size: clamp(3rem, 6vw, 5rem);
+            font-weight: 700;
             margin-bottom: 1rem;
+            letter-spacing: -0.02em;
+        }
+
+        .impact-label {
+            font-size: 1rem;
+            color: var(--gray);
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
         }
 
         /* Footer */
         footer {
             background: var(--black);
             color: var(--white);
-            padding: clamp(5rem, 10vh, 8rem) 0;
+            padding: 10rem 0;
             text-align: center;
+            position: relative;
         }
 
-        footer .section-title {
+        footer .section-title-large {
             color: var(--white);
         }
 
         footer .body-text {
             color: var(--white);
-            margin: 2rem auto 3rem;
+            margin: 3rem auto 4rem;
             opacity: 0.9;
+            max-width: 700px;
         }
 
         footer .btn-primary {
@@ -356,23 +588,109 @@
         footer .btn-primary:hover {
             background: transparent;
             color: var(--white);
+            border-color: var(--white);
+        }
+
+        /* Large Quote */
+        .quote-section {
+            margin: 10rem 0;
+            text-align: center;
+        }
+
+        .quote-text {
+            font-size: clamp(2rem, 4vw, 3.5rem);
+            font-weight: 600;
+            line-height: 1.3;
+            letter-spacing: -0.02em;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        /* Divider */
+        .divider {
+            height: 1px;
+            background: var(--black);
+            margin: 8rem 0;
         }
 
         /* Responsive */
-        @media (max-width: 768px) {
+        @media (max-width: 1024px) {
+            .split-section {
+                grid-template-columns: 1fr;
+                gap: 4rem;
+            }
+
+            .split-section.reverse {
+                direction: ltr;
+            }
+
             .process-flow {
-                flex-direction: column;
-            }
-
-            .process-arrow {
-                transform: rotate(90deg);
-                margin: 1rem 0;
-            }
-
-            .hemispheres {
                 grid-template-columns: 1fr;
             }
 
+            .process-flow::before {
+                top: 0;
+                bottom: 0;
+                left: 50%;
+                width: 1px;
+                height: 100%;
+                transform: translateX(-50%);
+            }
+
+            .process-step {
+                border-right: none;
+                border-bottom: 1px solid rgba(0,0,0,0.15);
+            }
+
+            .process-step:last-child {
+                border-bottom: none;
+            }
+
+            .feature-grid,
+            .hemispheres,
+            .pillars,
+            .pathways,
+            .partners-grid,
+            .impact-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .feature,
+            .hemisphere,
+            .pillar,
+            .pathway,
+            .partner-category,
+            .impact-stat {
+                border-right: none !important;
+                border-bottom: 1px solid var(--black);
+            }
+
+            .feature:last-child,
+            .hemisphere:last-child,
+            .pillar:last-child,
+            .pathway:last-child,
+            .partner-category:last-child,
+            .impact-stat:last-child {
+                border-bottom: none;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr;
+                gap: 0;
+            }
+
+            .stat {
+                border-left: none;
+                border-bottom: 1px solid rgba(255,255,255,0.2);
+                padding: 3rem 0;
+            }
+
+            .stat:last-child {
+                border-bottom: none;
+            }
+        }
+
+        @media (max-width: 768px) {
             .cta-group {
                 flex-direction: column;
                 align-items: center;
@@ -380,15 +698,15 @@
 
             .btn {
                 width: 100%;
-                max-width: 300px;
+                max-width: 350px;
             }
         }
 
-        /* Smooth fade-in animations */
+        /* Scroll Animations */
         @keyframes fadeInUp {
             from {
                 opacity: 0;
-                transform: translateY(30px);
+                transform: translateY(40px);
             }
             to {
                 opacity: 1;
@@ -396,8 +714,21 @@
             }
         }
 
-        .animate-in {
+        .fade-in {
+            opacity: 0;
             animation: fadeInUp 0.8s ease-out forwards;
+        }
+
+        /* Smooth reveal on scroll */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease-out;
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
         }
     </style>
 </head>
@@ -405,13 +736,13 @@
     <!-- Hero Section -->
     <section class="hero">
         <div class="container">
-            <div class="hero-content">
-                <h1 class="hero-title">Where Vision Meets Action</h1>
-                <p class="body-text">
-                    Saudi Arabia is not waiting for the future — it's building it. LEAD is the world's largest AI education and creation initiative, designed to train and empower over 15 million Saudis with hands-on experience in today's most advanced AI tools. From engineering and design to storytelling and strategy, LEAD turns learning into action and ambition into achievement.
+            <div class="hero-content fade-in">
+                <h1 class="hero-title">Where<br>Vision<br>Meets<br>Action</h1>
+                <p class="hero-subtitle">
+                    Saudi Arabia is not waiting for the future — it's building it. LEAD is the world's largest AI education and creation initiative, designed to empower 15 million Saudis with hands-on experience in today's most advanced AI tools.
                 </p>
-                <p class="body-text">
-                    Aligned with Vision 2030, LEAD brings together government, the private sector, and the world's leading AI companies to make innovation part of daily life. It's not about studying technology — it's about using it to build smarter businesses, better cities, and a more creative nation ready to lead globally.
+                <p class="hero-subtitle">
+                    Aligned with Vision 2030, LEAD brings together government, the private sector, and the world's leading AI companies to make innovation part of daily life.
                 </p>
                 <div class="cta-group">
                     <a href="#join" class="btn btn-primary">Start Learning</a>
@@ -424,42 +755,48 @@
     <!-- The Movement -->
     <section id="movement">
         <div class="container">
-            <h2 class="section-title">Building a Generation That Builds</h2>
-            <p class="body-text" style="margin-bottom: 3rem;">
-                LEAD is a nationwide movement that translates potential into progress. It links learning, creativity, and entrepreneurship into a single build cycle — designed to equip Saudi talent with the skills and opportunities to shape the AI era from the ground up.
-            </p>
+            <span class="eyebrow">The Movement</span>
+            <h2 class="section-title-large">Building a Generation That Builds</h2>
+            <div class="container-narrow">
+                <p class="body-text" style="margin-bottom: 4rem;">
+                    LEAD is a nationwide movement that translates potential into progress. It links learning, creativity, and entrepreneurship into a single build cycle — designed to equip Saudi talent with the skills and opportunities to shape the AI era from the ground up.
+                </p>
+            </div>
 
-            <div class="process-flow">
-                <div class="process-step">
-                    <h3 class="subsection-title">Learn</h3>
-                    <p class="body-text-small">Acquire skills through hands-on training</p>
-                </div>
-                <div class="process-arrow">→</div>
-                <div class="process-step">
-                    <h3 class="subsection-title">Build</h3>
-                    <p class="body-text-small">Create real products and solutions</p>
-                </div>
-                <div class="process-arrow">→</div>
-                <div class="process-step">
-                    <h3 class="subsection-title">Launch</h3>
-                    <p class="body-text-small">Deploy to market or production</p>
-                </div>
-                <div class="process-arrow">→</div>
-                <div class="process-step">
-                    <h3 class="subsection-title">Scale</h3>
-                    <p class="body-text-small">Grow ventures and careers</p>
+            <div class="process-wrapper">
+                <div class="process-flow">
+                    <div class="process-step">
+                        <div class="process-number">01</div>
+                        <h3 class="process-title">Learn</h3>
+                        <p class="body-text-small">Acquire skills through hands-on training</p>
+                    </div>
+                    <div class="process-step">
+                        <div class="process-number">02</div>
+                        <h3 class="process-title">Build</h3>
+                        <p class="body-text-small">Create real products and solutions</p>
+                    </div>
+                    <div class="process-step">
+                        <div class="process-number">03</div>
+                        <h3 class="process-title">Launch</h3>
+                        <p class="body-text-small">Deploy to market or production</p>
+                    </div>
+                    <div class="process-step">
+                        <div class="process-number">04</div>
+                        <h3 class="process-title">Scale</h3>
+                        <p class="body-text-small">Grow ventures and careers</p>
+                    </div>
                 </div>
             </div>
 
             <div class="feature-grid">
                 <div class="feature">
-                    <h3 class="subsection-title">National Collaboration</h3>
+                    <h3>National Collaboration</h3>
                     <p class="body-text-small">
                         Ministries, universities, and companies operate as one connected ecosystem: aligned briefs, shared infrastructure, and real deployment paths.
                     </p>
                 </div>
                 <div class="feature">
-                    <h3 class="subsection-title">Real Outcomes</h3>
+                    <h3>Real Outcomes</h3>
                     <p class="body-text-small">
                         Every serious project is connected to clear next steps — government pilots, startup formation, or employment with leading organizations.
                     </p>
@@ -471,26 +808,33 @@
     <!-- Why Saudi Arabia -->
     <section id="why-saudi">
         <div class="container">
-            <h2 class="section-title">The Perfect Ground for a Global Transformation</h2>
-            <p class="body-text">
-                Saudi Arabia's commitment to technology is comprehensive — digital infrastructure, policy, and investment are aligned to build an AI-driven economy. With ~99% internet penetration and a population where ~69–71% are under 35, the Kingdom combines near-universal connectivity with a dynamic, future-oriented population.
-            </p>
-            <p class="body-text" style="margin-top: 2rem;">
-                The government's alignment around Vision 2030 ensures innovation is supported and scaled at every level, while global partnerships and long-term investments in education position the Kingdom to become a primary center for AI development and application.
-            </p>
+            <span class="eyebrow">Why Saudi Arabia</span>
+            <h2 class="section-title-large">The Perfect Ground for a Global Transformation</h2>
+            <div class="container-narrow">
+                <p class="body-text" style="margin-bottom: 2rem;">
+                    Saudi Arabia's commitment to technology is comprehensive — digital infrastructure, policy, and investment are aligned to build an AI-driven economy.
+                </p>
+                <p class="body-text">
+                    The government's alignment around Vision 2030 ensures innovation is supported and scaled at every level, while global partnerships and long-term investments in education position the Kingdom to become a primary center for AI development and application.
+                </p>
+            </div>
+        </div>
 
-            <div class="stats-grid">
-                <div class="stat">
-                    <div class="stat-number">~99%</div>
-                    <div class="stat-label">Internet Penetration</div>
-                </div>
-                <div class="stat">
-                    <div class="stat-number">~70%</div>
-                    <div class="stat-label">Under 35 Years Old</div>
-                </div>
-                <div class="stat">
-                    <div class="stat-number">15M+</div>
-                    <div class="stat-label">Targeted for Training</div>
+        <div class="stats-wrapper">
+            <div class="container">
+                <div class="stats-grid">
+                    <div class="stat">
+                        <div class="stat-number">~99%</div>
+                        <div class="stat-label">Internet Penetration</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-number">~70%</div>
+                        <div class="stat-label">Under 35 Years Old</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-number">15M+</div>
+                        <div class="stat-label">Training Target</div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -499,26 +843,32 @@
     <!-- The LEAD Program -->
     <section id="program">
         <div class="container">
-            <h2 class="section-title">A National Platform for Learning, Building, and Launching</h2>
-            <p class="body-text" style="margin-bottom: 3rem;">
-                LEAD convenes the world's top AI companies — OpenAI, Google, Anthropic, Amazon, Midjourney, Runway, Adobe, and more — to teach and train across the full spectrum of AI: from technical depth (coding, automation, data systems) to practical creativity (design, media, business workflows).
-            </p>
+            <span class="eyebrow">The LEAD Program</span>
+            <h2 class="section-title-large">A National Platform for Learning, Building, and Launching</h2>
+            <div class="container-narrow">
+                <p class="body-text" style="margin-bottom: 4rem;">
+                    LEAD convenes the world's top AI companies — OpenAI, Google, Anthropic, Amazon, Midjourney, Runway, Adobe, and more — to teach and train across the full spectrum of AI: from technical depth to practical creativity.
+                </p>
+            </div>
 
             <div class="pillars">
                 <div class="pillar">
-                    <h3 class="subsection-title">Learn</h3>
+                    <div class="pillar-number">01</div>
+                    <h3>Learn</h3>
                     <p class="body-text-small">
                         Focused, hands-on sessions using real tools to solve Saudi-relevant problems in engineering, design, storytelling, and business operations.
                     </p>
                 </div>
                 <div class="pillar">
-                    <h3 class="subsection-title">Build</h3>
+                    <div class="pillar-number">02</div>
+                    <h3>Build</h3>
                     <p class="body-text-small">
-                        The national LEAD Hackathon: a high-intensity sprint where teams apply their new skills to concrete briefs and deliver working systems and creative outputs.
+                        The national LEAD Hackathon: a high-intensity sprint where teams apply their new skills to concrete briefs and deliver working systems.
                     </p>
                 </div>
                 <div class="pillar">
-                    <h3 class="subsection-title">Launch</h3>
+                    <div class="pillar-number">03</div>
+                    <h3>Launch</h3>
                     <p class="body-text-small">
                         Top projects move into government and corporate pilots, a 90-day venture studio, and hiring pathways with leading employers.
                     </p>
@@ -530,65 +880,75 @@
     <!-- The Hackathon -->
     <section id="hackathon">
         <div class="container">
-            <h2 class="section-title">The Nationwide Creation Sprint</h2>
-            <p class="body-text" style="margin-bottom: 3rem;">
-                The LEAD Hackathon is where learning becomes invention — a Kingdom-wide sprint uniting developers, artists, entrepreneurs, and professionals to build Saudi Arabia's next generation of solutions.
-            </p>
+            <span class="eyebrow">The Hackathon</span>
+            <h2 class="section-title-large">The Nationwide Creation Sprint</h2>
+            <div class="container-narrow">
+                <p class="body-text" style="margin-bottom: 4rem;">
+                    The LEAD Hackathon is where learning becomes invention — a Kingdom-wide sprint uniting developers, artists, entrepreneurs, and professionals to build Saudi Arabia's next generation of solutions.
+                </p>
+            </div>
 
-            <div class="hemispheres">
-                <div class="hemisphere">
-                    <div class="hemisphere-label">LEFT BRAIN</div>
-                    <h3>BUILD</h3>
-                    <p class="hemisphere-subtitle">Logic, engineering, and systems</p>
+            <div class="hemispheres-wrapper">
+                <div class="hemispheres">
+                    <div class="hemisphere">
+                        <div class="hemisphere-label">LEFT BRAIN</div>
+                        <h3>BUILD</h3>
+                        <p class="hemisphere-subtitle">Logic, engineering, and systems</p>
 
-                    <p style="font-weight: 600; margin-bottom: 0.5rem;">What gets built:</p>
-                    <ul class="hemisphere-list">
-                        <li>AI agents</li>
-                        <li>Business automation</li>
-                        <li>Domain apps (energy, healthcare, education, logistics)</li>
-                        <li>Data products and integrations</li>
-                    </ul>
+                        <p style="font-weight: 600; margin-bottom: 1rem; font-size: 1.125rem;">What gets built:</p>
+                        <ul class="hemisphere-list">
+                            <li>AI agents</li>
+                            <li>Business automation</li>
+                            <li>Domain apps (energy, healthcare, education)</li>
+                            <li>Data products and integrations</li>
+                        </ul>
 
-                    <p style="font-weight: 600; margin-bottom: 0.5rem;">What judges look for:</p>
-                    <p class="body-text-small">
-                        Reliability, utility, integration readiness, measurable benefit to users or operations.
-                    </p>
-                </div>
+                        <p style="font-weight: 600; margin-bottom: 1rem; font-size: 1.125rem;">What judges look for:</p>
+                        <p class="body-text-small">
+                            Reliability, utility, integration readiness, measurable benefit to users or operations.
+                        </p>
+                    </div>
 
-                <div class="hemisphere">
-                    <div class="hemisphere-label">RIGHT BRAIN</div>
-                    <h3>CREATE</h3>
-                    <p class="hemisphere-subtitle">Imagination, art, and storytelling</p>
+                    <div class="hemisphere">
+                        <div class="hemisphere-label">RIGHT BRAIN</div>
+                        <h3>CREATE</h3>
+                        <p class="hemisphere-subtitle">Imagination, art, and storytelling</p>
 
-                    <p style="font-weight: 600; margin-bottom: 0.5rem;">What gets created:</p>
-                    <ul class="hemisphere-list">
-                        <li>Generative video and imagery</li>
-                        <li>Audio experiences</li>
-                        <li>Brand systems</li>
-                        <li>Cultural and heritage storytelling</li>
-                        <li>Next-gen media formats</li>
-                    </ul>
+                        <p style="font-weight: 600; margin-bottom: 1rem; font-size: 1.125rem;">What gets created:</p>
+                        <ul class="hemisphere-list">
+                            <li>Generative video and imagery</li>
+                            <li>Audio experiences</li>
+                            <li>Brand systems</li>
+                            <li>Cultural and heritage storytelling</li>
+                            <li>Next-gen media formats</li>
+                        </ul>
 
-                    <p style="font-weight: 600; margin-bottom: 0.5rem;">What judges look for:</p>
-                    <p class="body-text-small">
-                        Originality, craft, audience impact, cultural relevance, responsible use.
-                    </p>
+                        <p style="font-weight: 600; margin-bottom: 1rem; font-size: 1.125rem;">What judges look for:</p>
+                        <p class="body-text-small">
+                            Originality, craft, audience impact, cultural relevance, responsible use.
+                        </p>
+                    </div>
                 </div>
             </div>
 
-            <p class="body-text" style="text-align: center; margin-top: 3rem;">
-                Accessible across all regions (hubs + online). Backed by ministries, universities, and global AI leaders. Real prizes, real pilots, and real pathways to scale.
-            </p>
+            <div class="container-narrow" style="margin-top: 4rem;">
+                <p class="body-text" style="text-align: center;">
+                    Accessible across all regions (hubs + online). Backed by ministries, universities, and global AI leaders. Real prizes, real pilots, and real pathways to scale.
+                </p>
+            </div>
         </div>
     </section>
 
     <!-- Pathways to Impact -->
     <section id="pathways">
         <div class="container">
-            <h2 class="section-title">From Skills to Scale</h2>
-            <p class="body-text" style="margin-bottom: 3rem;">
-                Participants follow a clear trajectory — from learning to building to real-world opportunity. The best projects don't end on stage; they move directly into structured programs with defined timelines.
-            </p>
+            <span class="eyebrow">Pathways to Impact</span>
+            <h2 class="section-title-large">From Skills to Scale</h2>
+            <div class="container-narrow">
+                <p class="body-text" style="margin-bottom: 4rem;">
+                    Participants follow a clear trajectory — from learning to building to real-world opportunity. The best projects don't end on stage; they move directly into structured programs with defined timelines.
+                </p>
+            </div>
 
             <div class="pathways">
                 <div class="pathway">
@@ -599,7 +959,7 @@
                 </div>
 
                 <div class="pathway">
-                    <h4>The Venture Studio (90 days)</h4>
+                    <h4>The Venture Studio<br>(90 days)</h4>
                     <p class="body-text-small">
                         Product shaping, customer access, and company formation for teams ready to scale.
                     </p>
@@ -618,10 +978,13 @@
     <!-- Partners & Supporters -->
     <section id="partners">
         <div class="container">
-            <h2 class="section-title">Powered by Partnership</h2>
-            <p class="body-text" style="margin-bottom: 3rem;">
-                LEAD is a shared national platform where each partner contributes tools, expertise, and opportunity.
-            </p>
+            <span class="eyebrow">Powered by Partnership</span>
+            <h2 class="section-title-large">Partners & Supporters</h2>
+            <div class="container-narrow">
+                <p class="body-text" style="margin-bottom: 4rem;">
+                    LEAD is a shared national platform where each partner contributes tools, expertise, and opportunity.
+                </p>
+            </div>
 
             <div class="partners-grid">
                 <div class="partner-category">
@@ -658,35 +1021,38 @@
     <!-- Impact Dashboard -->
     <section id="impact">
         <div class="container">
-            <h2 class="section-title">Measuring a Nation in Motion</h2>
-            <p class="body-text" style="margin-bottom: 3rem;">
-                LEAD tracks progress in real time — not only participation, but results that matter to citizens and the economy. With 15+ million Saudis targeted for training and a wider regional audience reachable through partner channels, the initiative operates at historic scale.
-            </p>
+            <span class="eyebrow">Impact Dashboard</span>
+            <h2 class="section-title-large">Measuring a Nation in Motion</h2>
+            <div class="container-narrow">
+                <p class="body-text" style="margin-bottom: 4rem;">
+                    LEAD tracks progress in real time — not only participation, but results that matter to citizens and the economy. With 15+ million Saudis targeted for training, the initiative operates at historic scale.
+                </p>
+            </div>
 
-            <div class="stats-grid">
-                <div class="stat">
-                    <div class="stat-number">—</div>
-                    <div class="stat-label">Saudis Trained</div>
+            <div class="impact-grid">
+                <div class="impact-stat">
+                    <div class="impact-number">—</div>
+                    <div class="impact-label">Saudis Trained</div>
                 </div>
-                <div class="stat">
-                    <div class="stat-number">—</div>
-                    <div class="stat-label">Projects Built</div>
+                <div class="impact-stat">
+                    <div class="impact-number">—</div>
+                    <div class="impact-label">Projects Built</div>
                 </div>
-                <div class="stat">
-                    <div class="stat-number">—</div>
-                    <div class="stat-label">Pilots Launched</div>
+                <div class="impact-stat">
+                    <div class="impact-number">—</div>
+                    <div class="impact-label">Pilots Launched</div>
                 </div>
-                <div class="stat">
-                    <div class="stat-number">—</div>
-                    <div class="stat-label">Startups Formed</div>
+                <div class="impact-stat">
+                    <div class="impact-number">—</div>
+                    <div class="impact-label">Startups Formed</div>
                 </div>
-                <div class="stat">
-                    <div class="stat-number">—</div>
-                    <div class="stat-label">Jobs Created</div>
+                <div class="impact-stat">
+                    <div class="impact-number">—</div>
+                    <div class="impact-label">Jobs Created</div>
                 </div>
-                <div class="stat">
-                    <div class="stat-number">—</div>
-                    <div class="stat-label">Regional Participation</div>
+                <div class="impact-stat">
+                    <div class="impact-number">—</div>
+                    <div class="impact-label">Regional Participation</div>
                 </div>
             </div>
         </div>
@@ -695,14 +1061,32 @@
     <!-- Join the Movement (Footer) -->
     <footer id="join">
         <div class="container">
-            <h2 class="section-title">Lead the Future</h2>
+            <h2 class="section-title-large">Lead the<br>Future</h2>
             <p class="body-text">
-                Every role matters — learner, creator, company, or ministry. Together, we are defining how Saudi Arabia leads the AI era. Join LEAD and help build what comes next.
+                Every role matters — learner, creator, company, or ministry. Together, we are defining how Saudi Arabia leads the AI era.
             </p>
             <div class="cta-group">
                 <a href="#" class="btn btn-primary">Join the Movement</a>
             </div>
         </div>
     </footer>
+
+    <script>
+        // Smooth reveal on scroll
+        const observerOptions = {
+            threshold: 0.15,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+    </script>
 </body>
 </html>
